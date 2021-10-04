@@ -1,8 +1,20 @@
 const form = document.getElementById('addBook');
 const addBookButton = document.getElementById('addBookButton');
+const submitFormButton = document.getElementById('submitButton');
+const libraryDiv = document.getElementById('myLibrary');
+
+let libraryBookDiv = ''
 
 addBookButton.addEventListener('click', openBookForm);
+submitFormButton.addEventListener('click', addBookToLibrary);
 
+function openBookForm() {
+    form.style.display = 'block';
+}
+
+function closeForm() {
+    form.style.display = 'none';
+}
 
 let myLibrary = [];
 
@@ -24,14 +36,112 @@ theHobbit = new Book('the Hobbit', 'J.R.R. Tolkien', 295, false);
 console.log(theHobbit.info());
 
 function addBookToLibrary() {
+    let bookTitleInput = document.getElementById('bookTitle').value;
+    let authorInput = document.getElementById('author').value;
+    let numberOfPagesInput = document.getElementById('numberOfPages').value;
+    let hasReadInput = document.getElementById('checkbox').value;
+
+    numberOfPagesInput = parseInt(numberOfPagesInput, 10);
+    if (hasReadInput === 'on') {
+        hasReadInput = true;
+    } else {
+        hasReadInput = false;
+    }
+
+    newBook = new Book(bookTitleInput, authorInput, numberOfPagesInput, hasReadInput);
+    console.log(newBook);
+
+    myLibrary.push(newBook);
+
     console.log(myLibrary);
-    //do stuff
+
+    clearLibraryCards();
+
+    for (i = 0; i < myLibrary.length; i++) {
+        createBookDiv();
+
+        createTitle();
+    
+        createAuthor();
+
+        createPageNumbers();
+
+        createReadElements();
+
+        createRemoveButton();
+    
+        libraryDiv.appendChild(libraryBookDiv);
+    }
+
+    closeForm();
+    clearFormInputs();
 }
 
-function openBookForm() {
-    form.style.display = 'block';
+function createTitle() {
+    let titleElement = document.createElement('h4');
+    titleElement.className += 'book-title';
+    let titleText = document.createTextNode(myLibrary[i].title);
+    titleElement.appendChild(titleText);
+    libraryBookDiv.appendChild(titleElement);
 }
 
-function closeForm() {
-    document.getElementById('addBook').style.display = 'none';
+function createAuthor() {
+    let authorElement = document.createElement('p');
+    authorElement.className += 'author';
+    let authorText = document.createTextNode(myLibrary[i].author);
+    authorElement.appendChild(authorText);
+    libraryBookDiv.appendChild(authorElement);
+}
+
+function createPageNumbers() {
+    let pageNumberElement = document.createElement('p');
+    pageNumberElement.className += 'page-number';
+    let pageNumberText = document.createTextNode(myLibrary[i].pages);
+    pageNumberElement.appendChild(pageNumberText);
+    libraryBookDiv.appendChild(pageNumberElement);
+}
+
+function createReadElements() {
+    let hasReadElement = document.createElement('p');
+    hasReadElement.className += 'has-read';
+    let hasReadText = ''
+    if (myLibrary[i].read === true) {
+        hasReadText = document.createTextNode('I read this!');
+    } else {
+        hasReadText = document.createTextNode('Not read yet!');
+        toggleReadButton();
+    }
+    hasReadElement.appendChild(hasReadText);
+    libraryBookDiv.appendChild(hasReadElement);
+}
+
+function createBookDiv() {
+    libraryBookDiv = document.createElement('div');
+    libraryBookDiv.className += 'library-book';
+    libraryDiv.appendChild(libraryBookDiv);
+}
+
+function clearLibraryCards() {
+    libraryDiv.innerHTML = ''
+}
+
+function createRemoveButton() {
+    let removeButton = document.createElement('button');
+    removeButton.className += 'library-btn';
+    removeButton.innerText = 'Remove';
+    libraryBookDiv.appendChild(removeButton);
+}
+
+function toggleReadButton() {
+    let readToggle = document.createElement('button');
+    readToggle.className += 'library-btn';
+    readToggle.innerText = 'I read this!';
+    libraryBookDiv.appendChild(readToggle);
+}
+
+function clearFormInputs() {
+    document.getElementById('bookTitle').value = '';
+    document.getElementById('author').value = '';
+    document.getElementById('numberOfPages').value = '';
+    document.getElementById('checkbox').value = '';
 }

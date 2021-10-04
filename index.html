@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
     <title>Library</title>
 </head>
 <body>
@@ -18,37 +18,39 @@
     </div>
 
     <div id="content">
-        <p>Welcome to your library! Here is a list of all the books in your inventory. 
-            Bought a new book? Click the "Add Book" button to add to your library!</p>
+        <p>Welcome to your library! Here is a list of all the books in your inventory.</p>
+        <p>Bought a new book? Click the button below!</p>
         <button id="addBookButton">Add Book</button>
 
         <div class="form-popup" id="addBook">
             <form action="/action_page.php" class="form-container">
-                <h1>Add a Book!</h1>
-
                 <div class="form-item">
                     <label for="book-title"><b>Book Title</b></label>
-                    <input type="text" placeholder="Enter Book Title" name="title" required>
+                    <input type="text" placeholder="Enter Book Title" name="title" id="bookTitle" required>
                 </div>
 
                 <div class="form-item">
                     <label for="author"><b>Author</b></label>
-                    <input type="text" placeholder="Enter Author" name="author" required>
+                    <input type="text" placeholder="Enter Author" name="author" id="author" required>
                 </div>
 
                 <div class="form-item">
                     <label for="number-of-pages"><b>Number of Pages</b></label>
-                    <input type="number" placeholder="999" name="number" required>
+                    <input type="number" placeholder="999" name="number" id="numberOfPages" required>
                 </div>
 
                 <div class="form-item">
                     <label for="has-read"><b>Have You Read This Book?</b></label>
-                    <input type="checkbox" name="read" required>
+                    <input type="checkbox" name="read" id="checkbox" value="on">
                 </div>
 
-                <button type="submit" class="btn">Submit</button>
+                <button type="button" class="btn" id="submitButton">Submit</button>
                 <button type="button" class="btn cancel" onClick="closeForm()">Close</button>
             </form>
+        </div>
+
+        <div class="library" id="myLibrary">
+
         </div>
     </div>
 
