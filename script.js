@@ -1,3 +1,9 @@
+const form = document.getElementById('addBook');
+const addBookButton = document.getElementById('addBookButton');
+
+addBookButton.addEventListener('click', openBookForm);
+
+
 let myLibrary = [];
 
 function Book(title, author, pages, read) {
@@ -20,4 +26,12 @@ console.log(theHobbit.info());
 function addBookToLibrary() {
     console.log(myLibrary);
     //do stuff
+}
+
+function openBookForm() {
+    form.style.display = 'block';
+}
+
+function closeForm() {
+    document.getElementById('addBook').style.display = 'none';
 }
