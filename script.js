@@ -32,9 +32,6 @@ function Book(title, author, pages, read) {
     }
 }
 
-theHobbit = new Book('the Hobbit', 'J.R.R. Tolkien', 295, false);
-console.log(theHobbit.info());
-
 function addBookToLibrary() {
     let bookTitleInput = document.getElementById('bookTitle').value;
     let authorInput = document.getElementById('author').value;
@@ -42,6 +39,7 @@ function addBookToLibrary() {
     let hasReadInput = document.getElementById('checkbox').value;
 
     numberOfPagesInput = parseInt(numberOfPagesInput, 10);
+
     if (hasReadInput === 'on') {
         hasReadInput = true;
     } else {
@@ -68,7 +66,9 @@ function addBookToLibrary() {
 
         createReadElements();
 
-        createRemoveButton();
+        // createRemoveButton();
+
+        // toggleReadButton();
     
         libraryDiv.appendChild(libraryBookDiv);
     }
@@ -109,7 +109,6 @@ function createReadElements() {
         hasReadText = document.createTextNode('I read this!');
     } else {
         hasReadText = document.createTextNode('Not read yet!');
-        toggleReadButton();
     }
     hasReadElement.appendChild(hasReadText);
     libraryBookDiv.appendChild(hasReadElement);
@@ -118,26 +117,45 @@ function createReadElements() {
 function createBookDiv() {
     libraryBookDiv = document.createElement('div');
     libraryBookDiv.className += 'library-book';
+    libraryBookDiv.setAttribute('id', i);
     libraryDiv.appendChild(libraryBookDiv);
 }
 
 function clearLibraryCards() {
-    libraryDiv.innerHTML = ''
+    libraryDiv.innerHTML = '';
 }
 
-function createRemoveButton() {
-    let removeButton = document.createElement('button');
-    removeButton.className += 'library-btn';
-    removeButton.innerText = 'Remove';
-    libraryBookDiv.appendChild(removeButton);
-}
+// function createRemoveButton() {
+//     let removeButton = document.createElement('button');
+//     removeButton.className += 'library-btn';
+//     removeButton.dataset.referenceNumber = i;
+//     removeButton.innerText = 'Remove';
+//     libraryBookDiv.appendChild(removeButton);
+//     removeButton.addEventListener('click', removeFromLibrary);
 
-function toggleReadButton() {
-    let readToggle = document.createElement('button');
-    readToggle.className += 'library-btn';
-    readToggle.innerText = 'I read this!';
-    libraryBookDiv.appendChild(readToggle);
-}
+//     function removeFromLibrary(event) {
+//         referenceNumber = event.target.referenceNumber
+//         console.log(referenceNumber);
+//         myLibrary.slice(referenceNumber, 1);
+//         // find the div element and empty its HTML
+//     }
+// }
+
+// function toggleReadButton() {
+//     let readToggle = document.createElement('button');
+//     readToggle.className += 'library-btn';
+//     readToggle.innerText = 'I have/have not read this!';
+//     libraryBookDiv.appendChild(readToggle);
+//     readToggle.addEventListener('click', toggleReadStatus)
+// }
+
+// function toggleReadStatus() {
+//     if (myLibrary[i].read === true) {
+//         hasReadInput = false;
+//     } else {
+//         hasReadInput = true;
+//     }
+// }
 
 function clearFormInputs() {
     document.getElementById('bookTitle').value = '';
