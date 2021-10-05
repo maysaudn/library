@@ -3,7 +3,7 @@ const addBookButton = document.getElementById('addBookButton');
 const submitFormButton = document.getElementById('submitButton');
 const libraryDiv = document.getElementById('myLibrary');
 
-let libraryBookDiv = ''
+let libraryBookDiv = '';
 
 addBookButton.addEventListener('click', openBookForm);
 submitFormButton.addEventListener('click', addBookToLibrary);
@@ -66,9 +66,9 @@ function addBookToLibrary() {
 
         createReadElements();
 
-        // createRemoveButton();
+        createRemoveButton();
 
-        // toggleReadButton();
+        toggleReadButton();
     
         libraryDiv.appendChild(libraryBookDiv);
     }
@@ -125,37 +125,41 @@ function clearLibraryCards() {
     libraryDiv.innerHTML = '';
 }
 
-// function createRemoveButton() {
-//     let removeButton = document.createElement('button');
-//     removeButton.className += 'library-btn';
-//     removeButton.dataset.referenceNumber = i;
-//     removeButton.innerText = 'Remove';
-//     libraryBookDiv.appendChild(removeButton);
-//     removeButton.addEventListener('click', removeFromLibrary);
+let removeButton = document.createElement('button');
+removeButton.innerText = 'Remove';
+removeButton.addEventListener('click', removeFromLibrary);
 
-//     function removeFromLibrary(event) {
-//         referenceNumber = event.target.referenceNumber
-//         console.log(referenceNumber);
-//         myLibrary.slice(referenceNumber, 1);
-//         // find the div element and empty its HTML
-//     }
-// }
+function createRemoveButton() {
+    removeButton.className += 'library-btn';
+    removeButton.dataset.referenceNumber = i
+    libraryBookDiv.appendChild(removeButton);
+}
 
-// function toggleReadButton() {
-//     let readToggle = document.createElement('button');
-//     readToggle.className += 'library-btn';
-//     readToggle.innerText = 'I have/have not read this!';
-//     libraryBookDiv.appendChild(readToggle);
-//     readToggle.addEventListener('click', toggleReadStatus)
-// }
+function removeFromLibrary(e) {
+    secondReferenceNumber = e.target.dataset.referenceNumber
+    console.log(secondReferenceNumber);
+    myLibrary.splice(secondReferenceNumber, 1);
+    console.log(myLibrary);
 
-// function toggleReadStatus() {
-//     if (myLibrary[i].read === true) {
-//         hasReadInput = false;
-//     } else {
-//         hasReadInput = true;
-//     }
-// }
+    let libraryBookDivReference = document.getElementById(secondReferenceNumber);
+    libraryBookDivReference.innerHTML = '';
+}
+
+function toggleReadButton() {
+    let readToggle = document.createElement('button');
+    readToggle.className += 'library-btn';
+    readToggle.innerText = 'I have/have not read this!';
+    libraryBookDiv.appendChild(readToggle);
+    readToggle.addEventListener('click', toggleReadStatus)
+}
+
+function toggleReadStatus() {
+    if (myLibrary[i].read === true) {
+        hasReadInput = false;
+    } else {
+        hasReadInput = true;
+    }
+}
 
 function clearFormInputs() {
     document.getElementById('bookTitle').value = '';
