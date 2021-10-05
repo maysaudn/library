@@ -36,15 +36,9 @@ function addBookToLibrary() {
     let bookTitleInput = document.getElementById('bookTitle').value;
     let authorInput = document.getElementById('author').value;
     let numberOfPagesInput = document.getElementById('numberOfPages').value;
-    let hasReadInput = document.getElementById('checkbox').value;
+    let hasReadInput = document.getElementById('checkbox').checked;
 
     numberOfPagesInput = parseInt(numberOfPagesInput, 10);
-
-    if (hasReadInput === 'on') {
-        hasReadInput = true;
-    } else {
-        hasReadInput = false;
-    }
 
     newBook = new Book(bookTitleInput, authorInput, numberOfPagesInput, hasReadInput);
     console.log(newBook);
@@ -104,6 +98,7 @@ function createPageNumbers() {
 function createReadElements() {
     let hasReadElement = document.createElement('p');
     hasReadElement.className += 'has-read';
+    hasReadElement.setAttribute('id', i + '-read')
     let hasReadText = ''
     if (myLibrary[i].read === true) {
         hasReadText = document.createTextNode('I read this!');
@@ -145,19 +140,28 @@ function removeFromLibrary(e) {
     libraryBookDivReference.innerHTML = '';
 }
 
+let readToggle = document.createElement('button');
+readToggle.className += 'library-btn';
+readToggle.innerText = 'I have/have not read this!';
+readToggle.addEventListener('click', toggleReadStatus)
+
 function toggleReadButton() {
-    let readToggle = document.createElement('button');
-    readToggle.className += 'library-btn';
-    readToggle.innerText = 'I have/have not read this!';
+    readToggle.dataset.referenceNumber = i;
     libraryBookDiv.appendChild(readToggle);
-    readToggle.addEventListener('click', toggleReadStatus)
 }
 
-function toggleReadStatus() {
-    if (myLibrary[i].read === true) {
-        hasReadInput = false;
+function toggleReadStatus(e) {
+    toggleReferenceNumber = e.target.dataset.referenceNumber;
+    console.log(toggleReferenceNumber);
+    toggleReferenceNumberId = toggleReferenceNumber + '-read';
+
+    let libraryBookToggleReference = document.getElementById(toggleReferenceNumberId);
+    if (myLibrary[toggleReferenceNumber].read === true) {
+        myLibrary[toggleReferenceNumber].read = false;
+        libraryBookToggleReference.innerText = 'Wait, I lied, I did not read this';
     } else {
-        hasReadInput = true;
+        myLibrary[toggleReferenceNumber].read = true;
+        libraryBookToggleReference.innerText = 'I read it now!'
     }
 }
 
