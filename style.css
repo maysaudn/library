@@ -5,6 +5,7 @@
 
 body {
     margin: 0;
+    margin-bottom: 100px;
     display: flex;
     flex-direction: column;
 }
@@ -57,6 +58,11 @@ button:hover {
     text-align: left;
     border: none;
     background: #e1c2ef;
+}
+
+.library-book {
+    display: inline-block;
+    width: 300px;
 }
 
 #footer {
