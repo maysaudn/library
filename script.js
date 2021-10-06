@@ -4,6 +4,8 @@ const submitFormButton = document.getElementById('submitButton');
 const libraryDiv = document.getElementById('myLibrary');
 
 let libraryBookDiv = '';
+let removeButton = '';
+let readToggle = '';
 
 addBookButton.addEventListener('click', openBookForm);
 submitFormButton.addEventListener('click', addBookToLibrary);
@@ -60,6 +62,15 @@ function addBookToLibrary() {
 
         createReadElements();
 
+        removeButton = document.createElement('button');
+        removeButton.innerText = 'Remove';
+        removeButton.className += 'library-btn';
+        removeButton.addEventListener('click', removeFromLibrary);
+
+        readToggle = document.createElement('button');
+        readToggle.className += 'library-btn';
+        readToggle.innerText = 'I have/have not read this!';
+        readToggle.addEventListener('click', toggleReadStatus);
         createRemoveButton();
 
         toggleReadButton();
@@ -120,12 +131,8 @@ function clearLibraryCards() {
     libraryDiv.innerHTML = '';
 }
 
-let removeButton = document.createElement('button');
-removeButton.innerText = 'Remove';
-removeButton.addEventListener('click', removeFromLibrary);
 
 function createRemoveButton() {
-    removeButton.className += 'library-btn';
     removeButton.dataset.referenceNumber = i
     libraryBookDiv.appendChild(removeButton);
 }
@@ -140,10 +147,7 @@ function removeFromLibrary(e) {
     libraryBookDivReference.innerHTML = '';
 }
 
-let readToggle = document.createElement('button');
-readToggle.className += 'library-btn';
-readToggle.innerText = 'I have/have not read this!';
-readToggle.addEventListener('click', toggleReadStatus)
+
 
 function toggleReadButton() {
     readToggle.dataset.referenceNumber = i;
